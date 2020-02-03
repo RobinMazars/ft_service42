@@ -12,3 +12,5 @@ docker build -t custom-grafana srcs/grafana
 kubectl apply -f ingress.yaml
 kubectl apply -f nginx.yaml
 kubectl apply -f grafana.yaml
+kubectl apply -k ./
+minikube service wordpress --url
