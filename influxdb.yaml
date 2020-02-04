@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: influxdb
+  name: influxdb
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8086
+  selector:
+    app: influxdb
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: influxdb
+spec:
+  strategy:
+    type: Recreate
+  replicas: 1
+  selector:
+    matchLabels:
+      app: influxdb
+  template:
+    metadata:
+      labels:
+        app: influxdb
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: influxdb
+        image: influxdb:1.5-alpine
+        ports:
+        - containerPort: 8086
+          hostPort: 8086
+        env:
+        - name: INFLUXDB_DB
+          value: influxdb
+        - name: INFLUXDB_DB
+          value: influxdb
+        - name: INFLUXDB_ADMIN_USER
+          value: admin
+        - name: INFLUXDB_ADMIN_PASSWORD
+          value: admin
