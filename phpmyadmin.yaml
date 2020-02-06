@@ -39,6 +39,9 @@ spec:
       - name: phpmyadmin
         image: custom-pma
         imagePullPolicy: Never
+        env:
+        - name: PMA_HOST
+          value: mysql
         ports:
         - containerPort: 80
           hostPort: 5000
