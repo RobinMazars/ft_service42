@@ -1,64 +1,69 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: wordpress-mysql
+  name: mysql
   labels:
-    app: wordpress
+    app: ft_services
 spec:
   ports:
-    - port: 3306
+  - port: 3306
+    targetPort: 3306
   selector:
-    app: wordpress
+    app: ft_services
     tier: mysql
   clusterIP: None
+  externalName: mysql.default
+
 ---
+
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: mysql-pv-claim
   labels:
-    app: wordpress
+    app: ft_services
 spec:
   accessModes:
-    - ReadWriteOnce
+  - ReadWriteOnce
   resources:
     requests:
-      storage: 20Gi
+      storage: 5Gi
+
 ---
-apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wordpress-mysql
+  name: mysql
   labels:
-    app: wordpress
+    app: ft_services
 spec:
   selector:
     matchLabels:
-      app: wordpress
+      app: ft_services
       tier: mysql
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: wordpress
+        app: ft_services
         tier: mysql
     spec:
+      restartPolicy: Always
       containers:
-      - image: mysql:5.6
-        name: mysql
+      - name: mysql
+        image: custom-mysql
+        imagePullPolicy: Never
         env:
         - name: MYSQL_ROOT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-pass
-              key: password
+          value: pass1234
         ports:
         - containerPort: 3306
           name: mysql
         volumeMounts:
         - name: mysql-persistent-storage
-          mountPath: /var/lib/mysql
+          mountPath: /app/mysql
       volumes:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
