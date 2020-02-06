@@ -6,38 +6,39 @@ metadata:
     app: ft_services
 spec:
   ports:
-  - port: 5000
-    targetPort: 5000
-
+  - port: 80
   selector:
     app: ft_services
     tier: phpmyadmin
   type: LoadBalancer
 
 ---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: phpmyadmin
   labels:
-    app: phpmyadmin
+    app: ft_services
 spec:
+  strategy:
+    type: Recreate
   replicas: 1
   selector:
     matchLabels:
-      app: phpmyadmin
+      app: ft_services
+      tier: phpmyadmin
   template:
     metadata:
       labels:
-        app: phpmyadmin
+        app: ft_services
+        tier: phpmyadmin
     spec:
+      restartPolicy: Always
       containers:
-        - name: phpmyadmin
-          image: phpmyadmin/phpmyadmin
-          ports:
-            - containerPort: 5000
-          env:
-            - name: PMA_HOST
-              value: mysql-service
-            - name: PMA_PORT
-              value: "3306"
+      - name: phpmyadmin
+        image: custom-pma
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+          hostPort: 5000

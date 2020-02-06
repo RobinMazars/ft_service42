@@ -27,12 +27,8 @@ spec:
   - ReadWriteOnce
   resources:
     requests:
-<<<<<<< HEAD:mysql-deployment.yaml
       storage: 2Gi
-=======
-      storage: 5Gi
 
->>>>>>> master:mysql.yaml
 ---
 
 apiVersion: apps/v1
