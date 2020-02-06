@@ -50,5 +50,5 @@ spec:
       restartPolicy: Always
       containers:
       - name: nginx
-        image: ft-nginx
+        image: custom-nginx
         imagePullPolicy: Never
