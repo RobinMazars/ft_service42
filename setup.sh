@@ -6,8 +6,9 @@ export KUB_IP=$(minikube ip)
 
 eval $(minikube docker-env)
 
-docker build -t custom-nginx:1.11 srcs/nginx
+docker build -t ft-nginx srcs/nginx
 docker build -t custom-grafana srcs/grafana
+docker build -t ft-wordpress srcs/wordpress
 
 kubectl apply -f ingress.yaml
 kubectl apply -f nginx.yaml
