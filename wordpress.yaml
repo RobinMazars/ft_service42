@@ -45,18 +45,23 @@ spec:
         tier: wordpress
     spec:
       containers:
-      - image: ft-wordpress:latest
+      - image: custom-wordpress:latest
         imagePullPolicy: Never
         name: wordpress
         env:
         - name: WORDPRESS_DB_HOST
-          value: mysql
+          value: localhost
+        - name: WORDPRESS_DB_NAME
+          value: wordpress
         - name: WORDPRESS_DB_USER
           value: root
         - name: WORDPRESS_DB_PASSWORD
           value: pass1234
+        - name: WORDPRESS_TABLE_PREFIX
+          value: wp_
         ports:
         - containerPort: 80
+          hostPort: 5050
           name: wordpress
         volumeMounts:
         - name: wordpress-persistent-storage

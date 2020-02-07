@@ -16,10 +16,6 @@ rm -f /run/apache2/httpd.pid
 
 echo "Updating HTTPD config"
 sed -i "s/ErrorLog logs\/error.log/Errorlog \/dev\/stderr\nTransferlog \/dev\/stdout/" /etc/apache2/httpd.conf
-sed -i "s/define('DB_NAME', null);/define('DB_NAME', '${MYSQL_DATABASE}');/" /var/www/localhost/htdocs/wp-config.php
-sed -i "s/define('DB_USER', null);/define('DB_USER', '${MYSQL_USER}');/" /var/www/localhost/htdocs/wp-config.php
-sed -i "s/define('DB_PASSWORD', null);/define('DB_PASSWORD', '${MYSQL_PASSWORD}');/" /var/www/localhost/htdocs/wp-config.php
-sed -i "s/define('DB_HOST', null);/define('DB_HOST', '${MYSQL_HOST}');/" /var/www/localhost/htdocs/wp-config.php
 
 echo "Starting all process ..."
 exec httpd -DFOREGROUND

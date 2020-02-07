@@ -8,10 +8,6 @@ ENV TIMEZONE Europe/Paris
 ENV VERSION_WORDPRESS 4.9.6
 ENV APACHE_SERVER_NAME example.com
 ENV APACHE_SERVER_PATH /var/www/localhost/htdocs
-ENV MYSQL_DATABASE app
-ENV MYSQL_USER app
-ENV MYSQL_PASSWORD app
-ENV MYSQL_HOST mysql
 
 # Installing dependencies
 RUN apk add --no-cache --virtual .build-deps unzip
