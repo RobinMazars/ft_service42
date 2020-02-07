@@ -22,6 +22,7 @@ fi
 echo Root password is pass1234
 
 cat << EOF > $tfile
+CREATE DATABASE wordpress;
 FLUSH PRIVILEGES;
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY "pass1234" WITH GRANT OPTION;
 EOF
