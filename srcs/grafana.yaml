@@ -31,7 +31,7 @@ data:
         database: influxdb
         user: admin
         password: admin
-        url: monitoring:8086
+        url: http://_KUB_IP_:8086
         jsonData:
           httpMode: GET
 
