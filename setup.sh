@@ -11,6 +11,7 @@ docker build -t custom-mysql srcs/mysql
 docker build -t custom-pma srcs/phpmyadmin
 docker build -t custom-ftps srcs/ftps
 docker build -t custom-grafana srcs/grafana
+docker build -t custom-wordpress srcs/wordpress
 
 kubectl apply -f ingress.yaml
 

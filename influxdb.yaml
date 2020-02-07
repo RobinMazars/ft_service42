@@ -3,13 +3,15 @@ kind: Service
 metadata:
   labels:
     name: influxdb
+    app : monitoring
   name: influxdb
 spec:
   type: LoadBalancer
   ports:
   - port: 8086
   selector:
-    app: influxdb
+    app: monitoring
+    tier: influxdb
 
 ---
 
@@ -17,17 +19,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: influxdb
+  labels:
+    app: monitoring
 spec:
   strategy:
     type: Recreate
   replicas: 1
   selector:
     matchLabels:
-      app: influxdb
+      app: monitoring
+      tier: influxdb
   template:
     metadata:
       labels:
-        app: influxdb
+        app: monitoring
+        tier: influxdb
     spec:
       restartPolicy: Always
       containers:

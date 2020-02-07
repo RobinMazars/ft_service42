@@ -3,13 +3,13 @@ kind: Service
 metadata:
   name: wordpress
   labels:
-    app: wordpress
+    app: ft_services
 spec:
   ports:
     - port: 80
   selector:
-    app: wordpress
-    tier: frontend
+    app: ft_services
+    tier: wordpress
   type: LoadBalancer
 ---
 apiVersion: v1
@@ -23,40 +23,45 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 20Gi
+      storage: 2Gi
 ---
 apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
 metadata:
   name: wordpress
   labels:
-    app: wordpress
+    app: ft_services
 spec:
   selector:
     matchLabels:
-      app: wordpress
-      tier: frontend
+      app: ft_services
+      tier: wordpress
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: wordpress
-        tier: frontend
+        app: ft_services
+        tier: wordpress
     spec:
       containers:
-      - image: wordpress:4.8-apache
+      - image: custom-wordpress:latest
+        imagePullPolicy: Never
         name: wordpress
         env:
         - name: WORDPRESS_DB_HOST
-          value: wordpress-mysql
+          value: localhost
+        - name: WORDPRESS_DB_NAME
+          value: wordpress
+        - name: WORDPRESS_DB_USER
+          value: root
         - name: WORDPRESS_DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: mysql-pass
-              key: password
+          value: pass1234
+        - name: WORDPRESS_TABLE_PREFIX
+          value: wp_
         ports:
         - containerPort: 80
+          hostPort: 5050
           name: wordpress
         volumeMounts:
         - name: wordpress-persistent-storage
