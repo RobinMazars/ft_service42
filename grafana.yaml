@@ -3,13 +3,37 @@ kind: Service
 metadata:
   labels:
     name: grafana
+    app : monitoring
   name: grafana
 spec:
   type: LoadBalancer
   ports:
   - port: 3000
   selector:
-    app: grafana
+    app: monitoring
+    tier: influxdb
+
+---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-datasources
+  labels:
+    grafana_datasource: '1'
+data:
+  datasource.yaml: |-
+    apiVersion: 1
+    datasources:
+      - name: InfluxDB
+        type: influxdb
+        access: proxy
+        database: influxdb
+        user: admin
+        password: admin
+        url: monitoring:8086
+        jsonData:
+          httpMode: GET
 
 ---
 
@@ -17,22 +41,26 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: grafana
+  labels:
+    app: monitoring
 spec:
   strategy:
     type: Recreate
   replicas: 1
   selector:
     matchLabels:
-      app: grafana
+      app: monitoring
   template:
     metadata:
       labels:
-        app: grafana
+        app: monitoring
+        tier: grafana
     spec:
       restartPolicy: Always
       containers:
       - name: grafana
         image: grafana/grafana
+        imagePullPolicy: Never
         ports:
         - containerPort: 3000
           hostPort: 3000
@@ -45,3 +73,12 @@ spec:
           value: "true"
         - name: GF_AUTH_ANONYMOUS_ORG_ROLE
           value: Admin
+        volumeMounts:
+          - mountPath: /etc/grafana/provisioning/datasources
+            name: grafana-datasources
+            readOnly: false
+      volumes:
+        - name: grafana-datasources
+          configMap:
+              defaultMode: 420
+              name: grafana-datasources
