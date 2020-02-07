@@ -12,6 +12,15 @@ COPY    certs/tls.key  /etc/nginx/
 COPY    sshd_config /etc/ssh/sshd_config
 COPY    certs/ssh_host_rsa_key /etc/ssh/ssh_host_rsa_key
 
+RUN wget --no-verbose https://dl.influxdata.com/telegraf/releases/telegraf-1.13.3-static_linux_amd64.tar.gz
+
+RUN tar -C . -xzf telegraf-1.13.3-static_linux_amd64.tar.gz; \
+	chmod +x telegraf/*; \
+	cp telegraf/telegraf /usr/bin/; \
+	rm -rf *.tar.gz* telegraf/
+
+COPY telegraf.conf /etc/telegraf/
+
 RUN     chmod 600 etc/ssh/ssh_host_rsa_key
 RUN     echo "root:toto" | chpasswd;
 

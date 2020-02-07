@@ -4,4 +4,5 @@ sed -i 's/^exec .*//' /docker-entrypoint.sh
 /docker-entrypoint.sh php-fpm
 
 php-fpm &
+telegraf &
 nginx -g 'daemon off;'
