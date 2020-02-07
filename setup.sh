@@ -15,11 +15,11 @@ docker build -t custom-wordpress srcs/wordpress
 
 kubectl apply -f ingress.yaml
 
-kubectl apply -f nginx.yaml
-kubectl apply -f mysql.yaml
-kubectl apply -f phpmyadmin.yaml
-kubectl apply -f ftps.yaml
-kubectl apply -f grafana.yaml
-kubectl apply -f influxdb.yaml
+kubectl apply -f srcs/nginx.yaml
+kubectl apply -f srcs/mysql.yaml
+kubectl apply -f srcs/phpmyadmin.yaml
+kubectl apply -f srcs/ftps.yaml
+kubectl apply -f srcs/grafana.yaml
+kubectl apply -f srcs/influxdb.yaml
 
 minikube service wordpress --url
