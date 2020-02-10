@@ -15,7 +15,9 @@ spec:
     port: 21000
     targetPort: 21000
     nodePort: 21000
+
 ---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:

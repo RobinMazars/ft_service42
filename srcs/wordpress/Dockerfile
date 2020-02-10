@@ -1,6 +1,5 @@
 FROM alpine:3.7
 
-
 ENV TIMEZONE Europe/Paris
 ENV VERSION_WORDPRESS 4.9.6
 ENV APACHE_SERVER_NAME example.com
