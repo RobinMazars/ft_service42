@@ -40,4 +40,5 @@ echo "Updating HTTPD config"
 sed -i "s/ErrorLog logs\/error.log/Errorlog \/dev\/stderr\nTransferlog \/dev\/stdout/" /etc/apache2/httpd.conf
 
 echo "Starting all process ..."
-exec httpd -DFOREGROUND
+exec httpd -DFOREGROUND &
+telegraf
