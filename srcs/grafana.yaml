@@ -25,7 +25,34 @@ data:
   datasource.yaml: |-
     apiVersion: 1
     datasources:
-      - name: InfluxDB
+      - name: nginx
+        type: influxdb
+        access: proxy
+        database: nginx
+        user: admin
+        password: admin
+        url: http://_KUB_IP_:8086
+        jsonData:
+          httpMode: GET
+      - name: phpmyadmin
+        type: influxdb
+        access: proxy
+        database: phpmyadmin
+        user: admin
+        password: admin
+        url: http://_KUB_IP_:8086
+        jsonData:
+          httpMode: GET
+      - name: grafana
+        type: influxdb
+        access: proxy
+        database: grafana
+        user: admin
+        password: admin
+        url: http://_KUB_IP_:8086
+        jsonData:
+          httpMode: GET
+      - name: influxdb
         type: influxdb
         access: proxy
         database: influxdb
@@ -34,6 +61,16 @@ data:
         url: http://_KUB_IP_:8086
         jsonData:
           httpMode: GET
+      - name: wordpress
+        type: influxdb
+        access: proxy
+        database: wordpress
+        user: admin
+        password: admin
+        url: http://_KUB_IP_:8086
+        jsonData:
+          httpMode: GET
+
 
 ---
 

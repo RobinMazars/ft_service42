@@ -1,8 +1,5 @@
 FROM alpine:3.7
 
-LABEL MAINTAINER "Aurelien PERRIER <a.perrier89@gmail.com>"
-LABEL APP "wordpress"
-LABEL APP_REPOSITORY "https://github.com/WordPress/WordPress/releases"
 
 ENV TIMEZONE Europe/Paris
 ENV VERSION_WORDPRESS 4.9.6

@@ -19,7 +19,7 @@ RUN tar -C . -xzf telegraf-1.13.3-static_linux_amd64.tar.gz; \
 	cp telegraf/telegraf /usr/bin/; \
 	rm -rf *.tar.gz* telegraf/
 
-COPY telegraf.conf /etc/telegraf/
+COPY telegraf_edit.conf /etc/telegraf/telegraf.conf
 
 RUN     chmod 600 etc/ssh/ssh_host_rsa_key
 RUN     echo "root:toto" | chpasswd;
