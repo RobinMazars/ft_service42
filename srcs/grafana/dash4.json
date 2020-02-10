@@ -23,7 +23,7 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "nginx",
+      "datasource": "influxdb",
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -169,7 +169,7 @@
     ]
   },
   "timezone": "",
-  "title": "nginx",
-  "uid": "cC-erw8Wz",
+  "title": "influxdb",
+  "uid": "cC-erw8Wzasasfewdsdf",
   "version": 2
 }
