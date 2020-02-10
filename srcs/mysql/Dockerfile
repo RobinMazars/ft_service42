@@ -7,7 +7,6 @@ COPY start.sh /start.sh
 
 RUN mkdir /app
 
-# ---------------
-
 EXPOSE 3306
+
 CMD sh /start.sh

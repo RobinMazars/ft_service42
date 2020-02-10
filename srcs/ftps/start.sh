@@ -2,7 +2,6 @@
 
 apk update
 
-# Install rc-service & pure-ftpd & ssl
 apk add openssl --no-cache
 apk add pure-ftpd --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted --no-cache
 
