@@ -1,5 +1,27 @@
 #!/bin/sh
 
+MYSQL="mysql -h mysql -u root --password=pass1234"
+
+conn_error()
+{
+	echo Connection error! Exiting...
+	exit 1
+}
+
+# crash if connection error
+$MYSQL -e '' || conn_error
+
+# init database
+if ! $MYSQL -e 'USE wordpress;'
+then
+	echo Initializing database...
+
+	$MYSQL -e 'CREATE DATABASE wordpress;' ||
+		( $MYSQL -e 'DROP DATABASE wordpress;'; conn_error)
+	$MYSQL wordpress < /wordpress.sql ||
+		( $MYSQL -e 'DROP DATABASE wordpress;'; conn_error)
+fi
+
 # Apache server name change
 if [ ! -z "${APACHE_SERVER_NAME}" ]
 	then

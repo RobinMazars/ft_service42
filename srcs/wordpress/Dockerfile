@@ -6,10 +6,13 @@ ENV VERSION_WORDPRESS 4.9.6
 ENV APACHE_SERVER_NAME example.com
 ENV APACHE_SERVER_PATH /var/www/localhost/htdocs
 
+RUN apk update
 # Installing dependencies
 RUN apk add --no-cache --virtual .build-deps unzip
 RUN apk add --no-cache apache2 php7 php7-apache2 php7-openssl php7-xml php7-pdo php7-mcrypt php7-session php7-mysqli php7-zlib su-exec
 RUN mkdir -p /run/apache2 /run/httpd
+
+RUN apk add mysql-client
 
 # Work path
 WORKDIR /scripts
@@ -28,6 +31,7 @@ RUN unzip -q wordpress-${VERSION_WORDPRESS}.zip -d ./ && \
 
 # Copy of the HTTPD startup script
 COPY ./start.sh ./start.sh
+COPY ./wordpress.sql /
 COPY ./wp-config.php ${APACHE_SERVER_PATH}/wp-config.php
 
 # COPY    ./start.sh  ./

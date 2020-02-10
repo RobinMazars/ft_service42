@@ -17,10 +17,10 @@ then
 fi
 
 cat << EOF > $tfile
-CREATE DATABASE wordpress;
 FLUSH PRIVILEGES;
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY "pass1234" WITH GRANT OPTION;
 EOF
+
 
 if ! /usr/bin/mysqld --user=root --bootstrap --verbose=0 < $tfile
 then

@@ -1,4 +1,4 @@
-minikube start --cpus=4 --memory 4000 --disk-size 11000 --vm-driver virtualbox --extra-config=apiserver.service-node-port-range=1-35000
+minikube start --cpus=4 --memory 5000 --disk-size 11000 --vm-driver virtualbox --extra-config=apiserver.service-node-port-range=1-35000
 
 minikube addons enable ingress
 
