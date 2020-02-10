@@ -71,9 +71,7 @@ data:
         jsonData:
           httpMode: GET
 
-
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -96,7 +94,8 @@ spec:
       restartPolicy: Always
       containers:
       - name: grafana
-        image: grafana/grafana
+        image: custom-grafana
+        imagePullPolicy: Never
         ports:
         - containerPort: 3000
           hostPort: 3000
