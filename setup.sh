@@ -18,7 +18,7 @@ sed -i '' "s/_KUB_IP_/$KUB_IP/g" srcs/phpmyadmin/telegraf_edit.conf
 docker build -t custom-nginx srcs/nginx
 docker build -t custom-mysql srcs/mysql
 docker build -t custom-pma srcs/phpmyadmin
-docker build -t custom-ftps srcs/ftps
+docker build --build-arg KUB_IP=$KUB_IP -t custom-ftps srcs/ftps
 docker build -t custom-wordpress srcs/wordpress
 docker build -t custom-grafana srcs/grafana
 

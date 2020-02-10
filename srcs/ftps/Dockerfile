@@ -1,13 +1,10 @@
+FROM alpine
 
-FROM alpine:3.10.3
+ARG KUB_IP
+ENV MY_IP $KUB_IP
 
-RUN apk --update --no-cache add vsftpd openssl && \
-rm -rf /tmp/* /var/cache/apk/*
-COPY vsftpd.conf /etc/vsftpd/vsftpd.conf
-COPY vsftpd.sh /usr/local/bin
+COPY start.sh /
+RUN sh start.sh
 
-# ---------------
-
-EXPOSE 20 21 32099 32100
-ENTRYPOINT ["vsftpd.sh"]
-CMD ["tail", "-F", "/var/log/vsftpd.log"]
+EXPOSE 21 21000
+CMD ["/bin/sh", "-c", "pure-ftpd -j -Y 2 -p 21000:21000 -P ${MY_IP}"]
