@@ -51,3 +51,5 @@ kubectl apply -f srcs/grafana_edit.yaml
 kubectl apply -f srcs/wordpress.yaml
 
 minikube ip
+
+minikube dashboard
