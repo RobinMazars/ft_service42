@@ -18,6 +18,12 @@ sed -i '' "s/_KUB_IP_/$KUB_IP/g" srcs/phpmyadmin/telegraf_edit.conf
 cp srcs/wordpress/telegraf.conf srcs/wordpress/telegraf_edit.conf
 sed -i '' "s/_KUB_IP_/$KUB_IP/g" srcs/wordpress/telegraf_edit.conf
 
+cp srcs/grafana/telegraf.conf srcs/grafana/telegraf_edit.conf
+sed -i '' "s/_KUB_IP_/$KUB_IP/g" srcs/grafana/telegraf_edit.conf
+
+cp srcs/ftps/telegraf.conf srcs/ftps/telegraf_edit.conf
+sed -i '' "s/_KUB_IP_/$KUB_IP/g" srcs/ftps/telegraf_edit.conf
+
 docker build -t custom-nginx srcs/nginx
 docker build -t custom-mysql srcs/mysql
 docker build -t custom-pma srcs/phpmyadmin
