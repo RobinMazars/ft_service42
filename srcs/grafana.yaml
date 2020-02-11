@@ -70,6 +70,24 @@ data:
         url: http://_KUB_IP_:8086
         jsonData:
           httpMode: GET
+      - name: ftps
+        type: influxdb
+        access: proxy
+        database: ftps
+        user: admin
+        password: admin
+        url: http://_KUB_IP_:8086
+        jsonData:
+          httpMode: GET
+      - name: mysql
+        type: influxdb
+        access: proxy
+        database: mysql
+        user: admin
+        password: admin
+        url: http://_KUB_IP_:8086
+        jsonData:
+          httpMode: GET
 
 ---
 apiVersion: apps/v1
