@@ -30,6 +30,9 @@ sed -i '' "s/_KUB_IP_/$KUB_IP/g" srcs/influxdb/telegraf_edit.conf
 cp srcs/mysql/telegraf.conf srcs/mysql/telegraf_edit.conf
 sed -i '' "s/_KUB_IP_/$KUB_IP/g" srcs/mysql/telegraf_edit.conf
 
+cp srcs/wordpress/wordpress-sample.sql srcs/wordpress/wordpress.sql
+sed -i '' "s/_KUB_IP_/$KUB_IP/g" srcs/wordpress/wordpress.sql
+
 docker build -t custom-nginx srcs/nginx
 docker build -t custom-mysql srcs/mysql
 docker build -t custom-pma srcs/phpmyadmin
