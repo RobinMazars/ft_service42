@@ -17,4 +17,4 @@ RUN tar -C . -xzf telegraf-1.13.3-static_linux_amd64.tar.gz; \
 
 COPY telegraf_edit.conf /etc/telegraf/telegraf.conf
 
-CMD ["/bin/sh", "-c", "pure-ftpd -j -Y 2 -p 21000:21000 -P ${MY_IP}", "&", "telegraf"]
+CMD ["telegraf", "&", "/bin/sh", "-c", "pure-ftpd -j -Y 2 -p 21000:21000 -P ${MY_IP}"]

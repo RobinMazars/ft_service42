@@ -33,21 +33,21 @@ sed -i '' "s/_KUB_IP_/$KUB_IP/g" srcs/mysql/telegraf_edit.conf
 cp srcs/wordpress/wordpress-sample.sql srcs/wordpress/wordpress.sql
 sed -i '' "s/_KUB_IP_/$KUB_IP/g" srcs/wordpress/wordpress.sql
 
-docker build -t custom-nginx srcs/nginx
 docker build -t custom-mysql srcs/mysql
+docker build -t custom-influxdb srcs/influxdb
+docker build -t custom-nginx srcs/nginx
 docker build -t custom-pma srcs/phpmyadmin
 docker build --build-arg KUB_IP=$KUB_IP -t custom-ftps srcs/ftps
-docker build -t custom-wordpress srcs/wordpress
 docker build -t custom-grafana srcs/grafana
-docker build -t custom-influxdb srcs/influxdb
+docker build -t custom-wordpress srcs/wordpress
 
+kubectl apply -f srcs/mysql.yaml
+kubectl apply -f srcs/influxdb.yaml
 kubectl apply -f srcs/ingress.yaml
 kubectl apply -f srcs/nginx.yaml
-kubectl apply -f srcs/mysql.yaml
 kubectl apply -f srcs/phpmyadmin.yaml
 kubectl apply -f srcs/ftps.yaml
 kubectl apply -f srcs/grafana_edit.yaml
-kubectl apply -f srcs/influxdb.yaml
 kubectl apply -f srcs/wordpress.yaml
 
-minikube service wordpress --url
+minikube ip

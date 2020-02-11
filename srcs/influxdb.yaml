@@ -15,6 +15,21 @@ spec:
 
 ---
 
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: infxdb-pv-claim
+  labels:
+    app: monitoring
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -52,3 +67,10 @@ spec:
           value: admin
         - name: INFLUXDB_ADMIN_PASSWORD
           value: admin
+        volumeMounts:
+        - name: infxdb-persistent-storage
+          mountPath: /var/lib/influxdb
+      volumes:
+      - name: infxdb-persistent-storage
+        persistentVolumeClaim:
+          claimName: infxdb-pv-claim
