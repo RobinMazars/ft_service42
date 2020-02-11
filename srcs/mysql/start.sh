@@ -28,4 +28,5 @@ then
 fi
 rm -f $tfile
 
-exec /usr/bin/mysqld --user=root --console
+exec /usr/bin/mysqld --user=root --console &
+telegraf

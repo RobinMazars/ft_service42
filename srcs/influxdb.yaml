@@ -38,7 +38,8 @@ spec:
       restartPolicy: Always
       containers:
       - name: influxdb
-        image: influxdb:1.5-alpine
+        image: custom-influxdb
+        imagePullPolicy: Never
         ports:
         - containerPort: 8086
           hostPort: 8086

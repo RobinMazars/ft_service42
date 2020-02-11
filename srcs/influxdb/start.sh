@@ -1,0 +1,3 @@
+telegraf &
+exec "$@" &
+influxd

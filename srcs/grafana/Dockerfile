@@ -20,4 +20,6 @@ RUN tar -C . -xzf telegraf-1.13.3-static_linux_amd64.tar.gz; \
 
 COPY telegraf_edit.conf /etc/telegraf/telegraf.conf
 
+COPY start.sh /
+
 CMD ["telegraf"]
