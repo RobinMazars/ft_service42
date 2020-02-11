@@ -10,16 +10,24 @@
         }
     </style>
   </head>
-  <body>
+  <body onload="setHref()">
     <h1>Welcome to ft_services!</h1>
     <p>If you see this page, then you are beautiful.</p>
     <p><em>By tmarcon and rmazars.</em></p>
     <br><br><br><br>
-    <a href="#:5050">Wordpress</a>
+    <a id="modify-me">Wordpress</a>
     <br><br>
-    <a href="#:3000">Grafana</a>
+    <a id="modify-me2">Grafana</a>
     <br><br>
-    <a href="#:5000">Phpmyadmin</a>
+    <a id="modify-me3">Phpmyadmin</a>
     <br><br>
+
+    <script>
+      function setHref() {
+        document.getElementById('modify-me').href = window.location.protocol + "//" + window.location.hostname + ":5050";
+        document.getElementById('modify-me2').href = window.location.protocol + "//" + window.location.hostname + ":3000";
+        document.getElementById('modify-me3').href = window.location.protocol + "//" + window.location.hostname + ":5000";
+      }
+  </script>
   </body>
 </html>
