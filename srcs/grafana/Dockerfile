@@ -1,6 +1,6 @@
 FROM grafana/grafana
 
-COPY dash_ftp.json /etc/grafana/provisioning/dashboards/
+COPY dash_ftps.json /etc/grafana/provisioning/dashboards/
 COPY dash_grafana.json /etc/grafana/provisioning/dashboards/
 COPY dash_influxdb.json /etc/grafana/provisioning/dashboards/
 COPY dash_mysql.json /etc/grafana/provisioning/dashboards/
